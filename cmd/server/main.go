@@ -18,7 +18,7 @@ import (
 func main() {
 
 	// Cargo csv.
-	list, err := LoadTicketsFromFile("../../tickets.csv")
+	list, err := LoadTicketsFromFile("./tickets.csv")
 	if err != nil {
 		panic("Couldn't load tickets")
 	}
@@ -34,6 +34,9 @@ func main() {
 	group.GET("/getByCountry/:dest", t.GetTicketsByCountry())
 	// GET - “/ticket/getAverage/:dest”
 	group.GET("/getAverage/:dest", t.AverageDestination())
+
+	group.GET("/getAll", t.GetAll())
+
 	if err := r.Run(); err != nil {
 		panic(err)
 	}

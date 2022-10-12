@@ -1,14 +1,13 @@
 package tickets
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/Santiagolaiton27/desafio-go-web-santiago-laiton/internal/domain"
 )
 
 type Repository interface {
-	GetAll(ctx context.Context) ([]domain.Ticket, error)
+	GetAll() ([]domain.Ticket, error)
 	GetTicketByDestination(destination string) ([]domain.Ticket, error)
 }
 
@@ -22,12 +21,11 @@ func NewRepository(db []domain.Ticket) Repository {
 	}
 }
 
-func (r *repository) GetAll(ctx context.Context) ([]domain.Ticket, error) {
+func (r *repository) GetAll() ([]domain.Ticket, error) {
 
 	if len(r.db) == 0 {
 		return []domain.Ticket{}, fmt.Errorf("empty list of tickets")
 	}
-
 	return r.db, nil
 }
 

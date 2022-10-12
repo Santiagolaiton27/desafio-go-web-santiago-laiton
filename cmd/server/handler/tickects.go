@@ -47,3 +47,13 @@ func (s *Service) AverageDestination() gin.HandlerFunc {
 		c.JSON(200, avg)
 	}
 }
+func (s *Service) GetAll() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		tickets, err := s.service.GetAll()
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, err.Error())
+			return
+		}
+		ctx.JSON(http.StatusOK, tickets)
+	}
+}
